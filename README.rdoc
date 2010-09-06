@@ -1,0 +1,4 @@
+= package_manager - A package manager abstraction
+
+Unifies the command interface for using yum and apt on Linux, Fink and MacPorts on OS X
+

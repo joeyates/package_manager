@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'rubygems' if RUBY_VERSION < '1.9'
+
+ROOT_PATH    = File.dirname( File.dirname( File.expand_path( __FILE__ ) ) )
+LIB_PATH     = File.join( ROOT_PATH, 'lib' )
+$:.unshift( LIB_PATH )
+require 'package_manager'
+
+OptionParser.new do | opts |
+  opts.banner = <<EOT
+#{ $0 }: Find available packages matching a string
+Usage: #{ $0 } [options]
+EOT
+end.parse!
+
+pkg = PackageManager::Base.load
+puts pkg.find_available( ARGV )
