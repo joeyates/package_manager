@@ -8,9 +8,10 @@ require 'package_manager'
 
 TITLE        = 'A package manager abstraction'
 ADMIN_FILES  = FileList[ 'Rakefile', 'README.rdoc' ]
-SOURCE_FILES = FileList[ 'bin/*', 'lib/**/*.rb' ]
+EXECUTABLES  = FileList[ 'bin/*' ]
+SOURCE_FILES = FileList[ 'lib/**/*.rb' ]
 SPEC_FILES   = FileList[ 'spec/**/*' ]
-RDOC_FILES   = FileList[ 'README.rdoc' ] + SOURCE_FILES
+RDOC_FILES   = FileList[ 'README.rdoc' ] + EXECUTABLES + SOURCE_FILES
 RDOC_OPTS    = [ '--quiet', '--main', 'README.rdoc', '--inline-source' ]
 
 spec = Gem::Specification.new do |s|
@@ -24,8 +25,9 @@ spec = Gem::Specification.new do |s|
   s.email            = 'joe.g.yates@gmail.com'
 
   s.files            = ADMIN_FILES +
+                       EXECUTABLES +
                        SOURCE_FILES
-  s.executables      += [ 'pkg-find-available' ]
+  s.executables      += EXECUTABLES
   s.require_paths    = [ 'lib' ]
   s.add_dependency( 'rake', '>= 0.8.7' )
 
