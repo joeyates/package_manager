@@ -1,6 +1,6 @@
 module PackageManager
 
-  class Apt < ::PackageManager::Base
+  class Apt < Dpkg
 
     def initialize
       @name = 'apt'
@@ -14,10 +14,6 @@ module PackageManager
 
     def find_installed_command
       'apt-cache search --installed --names-only'
-    end
-
-    def list_contents_command
-      'dpkg -L'
     end
 
     def install_command

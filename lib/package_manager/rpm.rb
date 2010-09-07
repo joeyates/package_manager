@@ -1,6 +1,6 @@
 module PackageManager
 
-  class Rpm < ::PackageManager::Base
+  class Rpm < Base
 
     def initialize
       @name = 'rpm'
@@ -14,10 +14,6 @@ module PackageManager
 
     def list_contents_command
       'rpm -q --filesbypkg'
-    end
-
-    def install_command
-      'yum install'
     end
 
   end
