@@ -12,6 +12,11 @@ module PackageManager
       'port search'
     end
 
+    def find_installed_command
+      # list all      | grab first word               | grep
+      "port installed | sed -E -e 's/ +([^ ]+).*/\\1/' | grep "
+    end
+
   end
 
 end

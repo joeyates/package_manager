@@ -6,7 +6,7 @@ $:.unshift( LIB_PATH )
 require 'package_manager'
 
 usage = <<EOT
-pkg-find-available: Find available packages matching a string
+pkg-find-installed: Find installed packages matching a string
 Usage: #{ $0 } [options]
 EOT
 
@@ -17,4 +17,4 @@ if ARGV.size < 1
 end
 
 pkg = PackageManager::Base.load
-puts pkg.find_available( ARGV )
+puts pkg.find_installed( ARGV )
