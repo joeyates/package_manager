@@ -20,6 +20,14 @@ module PackageManager
       run_command( command, argv[ 0 ] )
     end
 
+    def list_contents( argv )
+      raise "You should supply a package name" if argv.size < 1
+      command = find_list_contents
+      run_command( command, argv[ 0 ] )
+    end
+
+    private
+
     def run_command( command, *args )
       `#{ command } #{ args.join( ' ' ) }`
     end

@@ -12,6 +12,10 @@ module PackageManager
       'rpm -qa | grep'
     end
 
+    def list_contents_command
+      'rpm -q --filesbypkg'
+    end
+
   end
 
 end

@@ -16,6 +16,10 @@ module PackageManager
       'apt-cache search --installed --names-only'
     end
 
+    def list_contents_command
+      'dpkg -L'
+    end
+
   end
 
 end

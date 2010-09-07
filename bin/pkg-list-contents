@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+ROOT_PATH = File.dirname( File.dirname( File.expand_path( __FILE__ ) ) )
+LIB_PATH  = File.join( ROOT_PATH, 'lib' )
+$:.unshift( LIB_PATH )
+require 'package_manager'
+
+usage = <<EOT
+pkg-list-contents: List the files installed by a package
+Usage: #{ $0 } [options]
+EOT
+
+if ARGV.size < 1
+  $stderr.puts 'No package name supplied'
+  $stderr.puts usage
+  exit 1
+end
+
+pkg = PackageManager::Base.load
+puts pkg.list_contents( ARGV )
