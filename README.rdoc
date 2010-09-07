@@ -2,3 +2,9 @@
 
 Unifies the command interface for using yum and apt on Linux, Fink and MacPorts on OS X
 
+= Package Management Systems[http://en.wikipedia.org/wiki/Package_management_system]
+
+* Fink
+* Mac Ports
+* YUM
+* http://github.com/mxcl/homebrew
