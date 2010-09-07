@@ -16,6 +16,10 @@ module PackageManager
       'rpm -q --filesbypkg'
     end
 
+    def install_command
+      'yum install'
+    end
+
   end
 
 end

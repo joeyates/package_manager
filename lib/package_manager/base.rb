@@ -22,7 +22,13 @@ module PackageManager
 
     def list_contents( argv )
       raise "You should supply a package name" if argv.size < 1
-      command = find_list_contents
+      command = list_contents_command
+      run_command( command, argv[ 0 ] )
+    end
+
+    def install( argv )
+      raise "You should supply a package name" if argv.size < 1
+      command = install_command
       run_command( command, argv[ 0 ] )
     end
 

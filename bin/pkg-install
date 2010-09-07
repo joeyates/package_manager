@@ -6,7 +6,7 @@ $:.unshift( LIB_PATH )
 require 'package_manager'
 
 usage = <<EOT
-pkg-list-contents: List the files installed by a package
+pkg-install: Install apackage from a repository
 Usage: #{ $0 } [options]
 EOT
 
@@ -17,4 +17,4 @@ if ARGV.size < 1
 end
 
 pkg = PackageManager::Base.load
-puts pkg.list_contents( ARGV )
+puts pkg.install( ARGV )

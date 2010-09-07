@@ -20,6 +20,10 @@ module PackageManager
       'dpkg -L'
     end
 
+    def install_command
+      'apt-get install'
+    end
+
   end
 
 end
