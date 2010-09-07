@@ -14,6 +14,8 @@ SPEC_FILES   = FileList[ 'spec/**/*' ]
 RDOC_FILES   = FileList[ 'README.rdoc' ] + EXECUTABLES + SOURCE_FILES
 RDOC_OPTS    = [ '--quiet', '--main', 'README.rdoc', '--inline-source' ]
 
+EXECUTABLE_FILENAMES = EXECUTABLES.collect { | file | file.gsub( %r(^bin/), '' ) }
+
 spec = Gem::Specification.new do |s|
   s.name             = 'package_manager'
   s.summary          = TITLE
@@ -27,7 +29,7 @@ spec = Gem::Specification.new do |s|
   s.files            = ADMIN_FILES +
                        EXECUTABLES +
                        SOURCE_FILES
-  s.executables      += EXECUTABLES
+  s.executables      += EXECUTABLE_FILENAMES
   s.require_paths    = [ 'lib' ]
   s.add_dependency( 'rake', '>= 0.8.7' )
 
