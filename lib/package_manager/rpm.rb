@@ -16,6 +16,10 @@ module PackageManager
       'rpm -q --filesbypkg'
     end
 
+    def install_file_command
+      'rpm -ihv'
+    end
+
   end
 
 end

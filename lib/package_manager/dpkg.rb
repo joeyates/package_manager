@@ -12,6 +12,10 @@ module PackageManager
       'dpkg -L'
     end
 
+    def install_file_command
+      'dpkg -i'
+    end
+
   end
 
 end

@@ -32,6 +32,12 @@ module PackageManager
       run_command( command, argv[ 0 ] )
     end
 
+    def install_file( argv )
+      raise "You should supply a package name"         if argv.size < 1
+      raise "The file '#{ ARGV[ 0 ] }' does not exist" if ! File.exist?( argv[ 0 ] )
+      run_command( install_file_command, argv[ 0 ] )
+    end
+
     private
 
     def run_command( command, *args )

@@ -6,15 +6,9 @@ $:.unshift( LIB_PATH )
 require 'package_manager'
 
 usage = <<EOT
-pkg-install: Install a package from a repository
+pkg-install-file: Install a package from a file
 Usage: #{ $0 } [options]
 EOT
 
-if ARGV.size < 1
-  $stderr.puts 'No package name supplied'
-  $stderr.puts usage
-  exit 1
-end
-
 pkg = PackageManager::Base.load
-puts pkg.install( ARGV )
+puts pkg.install_file( ARGV )
