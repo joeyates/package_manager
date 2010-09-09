@@ -33,9 +33,20 @@ module PackageManager
     end
 
     def install_file( argv )
-      raise "You should supply a package name"         if argv.size < 1
-      raise "The file '#{ ARGV[ 0 ] }' does not exist" if ! File.exist?( argv[ 0 ] )
+      raise 'No package name supplied'                 if argv.size < 1
+      raise 'The file '#{ ARGV[ 0 ] }' does not exist' if ! File.exist?( argv[ 0 ] )
       run_command( install_file_command, argv[ 0 ] )
+    end
+
+    def uninstall( argv )
+      raise "You should supply a package name" if argv.size < 1
+      run_command( uninstall_command, argv[ 0 ] )
+    end
+
+    def provides( argv )
+      raise 'No package name supplied'                 if argv.size < 1
+      raise 'The file '#{ ARGV[ 0 ] }' does not exist' if ! File.exist?( argv[ 0 ] )
+      run_command( provides_command, argv[ 0 ] )
     end
 
     private

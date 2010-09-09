@@ -20,6 +20,10 @@ module PackageManager
       'rpm -ihv'
     end
 
+    def provides_command
+      'rpm -qf'
+    end
+
   end
 
 end

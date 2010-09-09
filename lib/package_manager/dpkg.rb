@@ -16,6 +16,10 @@ module PackageManager
       'dpkg -i'
     end
 
+    def provides_command
+      'dpkg-query -S'
+    end
+
   end
 
 end

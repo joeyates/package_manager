@@ -12,6 +12,10 @@ module PackageManager
       'yum install'
     end
 
+    def uninstall_command
+      'yum remove'
+    end
+
   end
 
 end

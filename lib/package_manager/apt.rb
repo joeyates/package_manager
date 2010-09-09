@@ -20,6 +20,10 @@ module PackageManager
       'apt-get install'
     end
 
+    def uninstall_command
+      'apt-get remove'
+    end
+
   end
 
 end
