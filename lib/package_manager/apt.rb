@@ -1,3 +1,5 @@
+require 'package_manager/dpkg'
+
 module PackageManager
 
   class Apt < Dpkg

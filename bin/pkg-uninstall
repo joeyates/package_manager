@@ -10,5 +10,11 @@ pkg-uninstall: Uninstall the named package
 Usage: #{ $0 } [options]
 EOT
 
+if ARGV.size < 1
+  $stderr.puts 'No package name supplied'
+  $stderr.puts usage
+  exit 1
+end
+
 pkg = PackageManager::Base.load
-puts pkg.uninstall( ARGV )
+puts pkg.uninstall( ARGV[ 0 ] )

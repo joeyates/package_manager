@@ -17,4 +17,4 @@ if ARGV.size < 1
 end
 
 pkg = PackageManager::Base.load
-puts pkg.find_installed( ARGV )
+puts pkg.find_installed( ARGV[ 0 ] )
