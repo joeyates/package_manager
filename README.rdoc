@@ -5,13 +5,15 @@ Unifies the command interface for using yum and apt on Linux, Fink and MacPorts 
 = Commands
 
 The following commands are provided:
-* pkg-find-available
-* pkg-find-installed
-* pkg-install
-* pkg-install-file
-* pkg-list-contents
+* pkg-find-available - list matching packages that are available for installation
+* pkg-find-installed - list matching packages that are installed
+* pkg-install - install the named package
+* pkg-install-file - install a package from a file
+* pkg-list-contents - list the files contained in an installed packages
+* pkg-provides - which pakage installed the given file?
+* pkg-uninstall - remove the named pakage from the system
 
-= Package Management Systems[http://en.wikipedia.org/wiki/Package_management_system]
+= {Package Management Systems}[http://en.wikipedia.org/wiki/Package_management_system]
 
 * Fink
 * Mac Ports
