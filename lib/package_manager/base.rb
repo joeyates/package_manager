@@ -53,7 +53,7 @@ module PackageManager
 
     # Returns true if the package installed successfully
     def install_file( file )
-      raise 'The file '#{ file }' does not exist' if ! File.exist?( file )
+      raise "The file '#{ file }' does not exist" if ! File.exist?( file )
       run_command( install_file_command, file )
       $?.exitstatus == 0
     end
@@ -66,7 +66,7 @@ module PackageManager
 
     # Returns the package name if found, or an empty string
     def provides( file )
-      raise 'The file '#{ file }' does not exist' if ! File.exist?( file )
+      raise "The file '#{ file }' does not exist" if ! File.exist?( file )
       run_command( provides_command, file )
     end
 
@@ -77,21 +77,22 @@ module PackageManager
     end
 
     def self.guess_package_manager
-      case operating_system
+      os = operating_system
+      case os
       when 'linux'
         linux_package_manager
       when 'darwin'
         darwin_package_manager
       else
-        raise 'Unhandled operating system'
+        raise "Unhandled operating system: '#{ os }'"
       end
     end
 
     def self.operating_system
       platforms = Gem.platforms
-      raise 'Unexpected response from Gem.platforms'     unless platforms.respond_to?( :size )
-      raise 'Expected Array of 2 values'                 unless platforms.size == 2
-      raise 'Unexpected value returned by Gem.platforms' unless platforms[ 1 ].respond_to?( :os )
+      raise 'Unexpected response from Gem.platforms'                       unless platforms.respond_to?( :size )
+      raise 'Expected Array of 2 values'                                   unless platforms.size == 2
+      raise 'Unexpected operating system object returned by Gem.platforms' unless platforms[ 1 ].respond_to?( :os )
       platforms[ 1 ].os
     end
 

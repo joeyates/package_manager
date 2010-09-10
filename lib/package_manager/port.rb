@@ -17,6 +17,22 @@ module PackageManager
       "port installed | sed -E -e 's/ +([^ ]+).*/\\1/' | grep "
     end
 
+    def install_command
+      'port install'
+    end
+
+    def uninstall_command
+      'port uninstall'
+    end
+
+    def provides_command
+      'port provides'
+    end
+
+    def contents_command
+      'port contents'
+    end
+
   end
 
 end
