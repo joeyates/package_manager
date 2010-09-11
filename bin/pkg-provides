@@ -17,4 +17,4 @@ if ARGV.size < 1
 end
 
 pkg = PackageManager::Base.load
-puts pkg.provides( ARGV )
+puts pkg.provides( ARGV[ 0 ] )
