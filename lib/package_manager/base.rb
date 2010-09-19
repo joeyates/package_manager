@@ -32,48 +32,57 @@ module PackageManager
 
     # Returns an array of matches
     def find_available( package_match )
-      run_command( find_available_command, package_match ).split("\n")
+      run_command( find_available_command, [ package_match ] ).split( "\n" )
     end
 
     # Returns an array of matches
     def find_installed( package_match )
-      run_command( find_installed_command, package_match ).split("\n").uniq
+      run_command( find_installed_command, [ package_match ] ).split( "\n" ).uniq
     end
 
     # Returns an array of file names
     def list_contents( package )
-      run_command( list_contents_command, package ).split("\n")
+      run_command( list_contents_command, [ package ] ).split( "\n" )
     end
 
     # Returns true if the package installed successfully
     def install( package )
-      run_command( install_command, package )
+      run_command( 'sudo ' + install_command, [ package ], { :echo_output => true } )
       $?.exitstatus == 0
     end
 
     # Returns true if the package installed successfully
     def install_file( file )
       raise "The file '#{ file }' does not exist" if ! File.exist?( file )
-      run_command( install_file_command, file )
+      run_command( 'sudo ' + install_file_command, [ file ], { :echo_output => true } )
       $?.exitstatus == 0
     end
 
     # Returns true if the package uninstalled successfully
     def uninstall( package )
-      run_command( uninstall_command, package )
+      run_command( 'sudo ' + uninstall_command, [ package ], { :echo_output => true } )
       $?.exitstatus == 0
     end
 
     # Returns the package name if found, or an empty string
     def provides( file )
       raise "The file '#{ file }' does not exist" if ! File.exist?( file )
-      run_command( provides_command, file )
+      run_command( provides_command, [ file ] )
     end
 
     private
 
-    def run_command( command, *args )
-      `#{ command } #{ args.join( ' ' ) }`.chomp
+    def run_command( command, args, options = {} )
+      full_command = "#{ command } #{ args.join( ' ' ) }"
+      out = ''
+      IO.popen( full_command ) do | pipe |
+        pipe.each_line do | s |
+          puts s if options[ :echo_output ]
+          out << s
+        end
+      end
+
+      out.chomp
     end
 
     def self.guess_package_manager

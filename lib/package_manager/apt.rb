@@ -19,11 +19,11 @@ module PackageManager
     end
 
     def install_command
-      'apt-get install'
+      'apt-get install -y'
     end
 
     def uninstall_command
-      'apt-get remove'
+      'apt-get remove -y'
     end
 
   end
