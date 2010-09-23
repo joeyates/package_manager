@@ -47,21 +47,18 @@ module PackageManager
 
     # Returns true if the package installed successfully
     def install( package )
-      run_command( 'sudo ' + install_command, [ package ], { :echo_output => true } )
-      $?.exitstatus == 0
+      exec_command( 'sudo ' + install_command, [ package ], { :echo_output => true } )
     end
 
     # Returns true if the package installed successfully
     def install_file( file )
       raise "The file '#{ file }' does not exist" if ! File.exist?( file )
-      run_command( 'sudo ' + install_file_command, [ file ], { :echo_output => true } )
-      $?.exitstatus == 0
+      exec_command( 'sudo ' + install_file_command, [ file ], { :echo_output => true } )
     end
 
     # Returns true if the package uninstalled successfully
     def uninstall( package )
-      run_command( 'sudo ' + uninstall_command, [ package ], { :echo_output => true } )
-      $?.exitstatus == 0
+      exec_command( 'sudo ' + uninstall_command, [ package ], { :echo_output => true } )
     end
 
     # Returns the package name if found, or an empty string
@@ -83,6 +80,10 @@ module PackageManager
       end
 
       out.chomp
+    end
+
+    def exec_command( command, args, options = {} )
+      exec "#{ command } #{ args.join( ' ' ) }"
     end
 
     def self.guess_package_manager
