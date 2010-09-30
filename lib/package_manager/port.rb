@@ -29,7 +29,7 @@ module PackageManager
       'port provides'
     end
 
-    def contents_command
+    def list_contents_command
       'port contents'
     end
 
