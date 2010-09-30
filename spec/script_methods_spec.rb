@@ -8,13 +8,11 @@ require File.join( ROOT_PATH, 'lib', 'package_manager' )
 describe 'script methods' do
   
   before( :all ) do
-    PackageManager::Base.stub!( :operating_system ).and_return( 'linux' )
-    PackageManager::Base.stub!( :program_installed? ).with( 'apt-get' ).and_return( true )
-    @pkg = PackageManager::Base.load
+    @pkg = PackageManager::Base.load( 'apt' )
   end
 
   it "should run commands through a subprocess" do
-    @pkg.should_receive( '`'.intern ).and_return( "foo\n" )
+    IO.should_receive( :popen ).and_return( "foo\n" )
     @pkg.find_available( 'pkg' )
   end
 
@@ -33,31 +31,27 @@ describe 'script methods' do
     @pkg.list_contents( 'pkg' ).should be_a( Array )
   end
 
-  it "#install should return true or false" do
-    `ls`
-    @pkg.stub!( :run_command )
-    @pkg.install( 'pkg' ).should be_true
+  it "#install should replace the current process via exec" do
+    @pkg.should_receive( :exec )
+    @pkg.install( 'pkg' )
   end
 
-  it "#install_file should return true or false" do
-    `ls` # Force $?.exitstatus to be 0
-    @pkg.stub!( :run_command )
+  it "#install_file should replace the current process via exec" do
+    @pkg.should_receive( :exec )
     File.stub!( :exist? ).and_return( true )
-    @pkg.install_file( 'my_pkg' ).should be_true
+    @pkg.install_file( 'my_pkg' )
   end
 
   it "#install_file should throw an error if the file does not exist" do
-    @pkg.stub!( :run_command )
     File.stub!( :exist? ).and_return( false )
     lambda do
       @pkg.install_file( 'my_pkg' )
     end.should raise_error( StandardError, /does not exist/ )
   end
 
-  it "#uninstall should return true or false" do
-    `ls`
-    @pkg.stub!( :run_command )
-    @pkg.uninstall( 'pkg' ).should be_true
+  it "#uninstall should replace the current process via exec" do
+    @pkg.should_receive( :exec )
+    @pkg.uninstall( 'pkg' )
   end
 
   it "#provides should return a String" do
